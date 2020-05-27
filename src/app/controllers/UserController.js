@@ -6,10 +6,20 @@ class UserController {
 
         const user = await User.findByPk(userId, 'id');
 
-        return user;
+        return res.send(user);
     }
 
-    async update(req, res) {}
+    async update(req, res) {
+        const { userId } = req.params;
+
+        const user = await User.findByPk(userId);
+
+        const { username, name, provider, admin } = req.body;
+
+        await user.update({ username, name, provider, admin });
+
+        return res.json(user);
+    }
 }
 
 export default new UserController();

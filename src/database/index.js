@@ -2,14 +2,15 @@ import mongoose from 'mongoose';
 import Sequelize from 'sequelize';
 import Protocol from '../app/models/Protocol';
 import User from '../app/models/User';
+import File from '../app/models/File';
 import databaseConfig from '../config/database';
 
-const models = [User, Protocol];
+const models = [User, Protocol, File];
 
 class Database {
     constructor() {
         this.init();
-        this.mongo();
+        //this.mongo();
     }
 
     init() {
@@ -17,7 +18,7 @@ class Database {
     }
 
     database() {
-        this.connection = new Sequelize(databaseConfig.controle);
+        this.connection = new Sequelize(databaseConfig);
 
         models
             .map(model => model.init(this.connection))

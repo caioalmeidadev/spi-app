@@ -30,6 +30,10 @@ class Protocol extends Model {
                     type: Sequelize.STRING,
                     allowNull: false,
                 },
+                created_by: {
+                    type: Sequelize.INTEGER,
+                    allowNull: false,
+                },
             },
             { sequelize }
         );

@@ -3,6 +3,7 @@ import User from '../models/User';
 class SessionController {
     async store(req, res) {
         const { username, password } = req.body;
+        console.log(username, password);
 
         const user = await User.findOne({ where: { username } });
 

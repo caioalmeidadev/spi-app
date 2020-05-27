@@ -1,24 +1,41 @@
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable('tasks', {
+        return queryInterface.createTable('protocols', {
             id: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
             },
+            from: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+            to: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+            status: {
+                type: Sequelize.STRING,
+                allowNull: false,
+                defaultValue: 'G',
+            },
+            delivery_date: {
+                type: Sequelize.DATE,
+                allowNull: true,
+            },
+            departue_date: {
+                type: Sequelize.DATE,
+                allowNull: false,
+                defaultValue: new Date(),
+            },
             description: {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
-            project_id: {
+            created_by: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
-            },
-            status: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-                defaultValue: 0,
             },
             created_at: {
                 type: Sequelize.DATE,
@@ -32,6 +49,6 @@ module.exports = {
     },
 
     down: queryInterface => {
-        return queryInterface.dropTable('users');
+        return queryInterface.dropTable('protocols');
     },
 };
