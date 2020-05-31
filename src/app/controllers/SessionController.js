@@ -1,9 +1,12 @@
+import jwt from 'jsonwebtoken';
+
+import authConfig from '../../config/auth';
+
 import User from '../models/User';
 
 class SessionController {
     async store(req, res) {
         const { username, password } = req.body;
-        console.log(username, password);
 
         const user = await User.findOne({ where: { username } });
 
@@ -17,7 +20,12 @@ class SessionController {
                 .json({ error: 'A senha digitada não confere' });
         }
 
-        return res.json(user);
+        const { id, name, avatar, provider, admin } = user;
+        const token = jwt.sign({ id }, authConfig.secret, {
+            expiresIn: authConfig.expiresIn,
+        });
+
+        return res.json({ id, name, avatar, provider, admin, token });
     }
 }
 

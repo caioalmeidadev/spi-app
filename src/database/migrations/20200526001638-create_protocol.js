@@ -18,7 +18,7 @@ module.exports = {
             status: {
                 type: Sequelize.STRING,
                 allowNull: false,
-                defaultValue: 'G',
+                defaultValue: 'I',
             },
             delivery_date: {
                 type: Sequelize.DATE,
@@ -33,9 +33,19 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
-            created_by: {
+            user_id: {
                 type: Sequelize.INTEGER,
+                references: { model: 'users', key: 'id' },
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE',
                 allowNull: false,
+            },
+            file_id: {
+                type: Sequelize.INTEGER,
+                references: { model: 'files', key: 'id' },
+                onUpdate: 'CASCADE',
+                onDelete: 'SET NULL',
+                allowNull: true,
             },
             created_at: {
                 type: Sequelize.DATE,

@@ -1,4 +1,4 @@
-import Sequelize, { Model, NOW } from 'sequelize';
+import Sequelize, { Model } from 'sequelize';
 
 class Protocol extends Model {
     static init(sequelize) {
@@ -15,7 +15,7 @@ class Protocol extends Model {
                 status: {
                     type: Sequelize.STRING,
                     allowNull: false,
-                    defaultValue: 'G',
+                    defaultValue: 'I',
                 },
                 delivery_date: {
                     type: Sequelize.DATE,
@@ -24,14 +24,10 @@ class Protocol extends Model {
                 departue_date: {
                     type: Sequelize.DATE,
                     allowNull: false,
-                    defaultValue: NOW(),
+                    defaultValue: new Date(),
                 },
                 description: {
                     type: Sequelize.STRING,
-                    allowNull: false,
-                },
-                created_by: {
-                    type: Sequelize.INTEGER,
                     allowNull: false,
                 },
             },
@@ -44,7 +40,7 @@ class Protocol extends Model {
     static associate(models) {
         this.belongsTo(models.User, {
             foreignKey: 'user_id',
-            as: 'creator',
+            as: 'created_by',
         });
 
         this.belongsTo(models.File, { foreignKey: 'file_id', as: 'image' });
